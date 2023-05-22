@@ -1,0 +1,75 @@
+#include <SoftwareSerial.h>
+#include <NewPing.h>
+
+#define TRIGGER_PIN 12 // Pin für den Ultraschall-Sensor (Trigger)
+#define ECHO_PIN 11    // Pin für den Ultraschall-Sensor (Echo)
+#define MAX_DISTANCE 200 // Maximale Entfernung für den Ultraschall-Sensor
+
+SoftwareSerial bluetoothSerial(2, 3); // RX, TX Pins für das Bluetooth-Modul
+
+NewPing sonar(TRIGGER_PIN, ECHO_PIN, MAX_DISTANCE); // Ultraschall-Sensor-Objekt erstellen
+
+void setup() {
+  Serial.begin(9600); // Serielle Kommunikation mit dem PC (für Debugging)
+  bluetoothSerial.begin(9600); // Bluetooth-Modul initialisieren
+}
+
+void loop() {
+  if (bluetoothSerial.available()) {
+    char command = bluetoothSerial.read();
+    executeCommand(command);
+  }
+}
+
+void executeCommand(char command) {
+  switch (command) {
+    case 'F': // Vorwärts
+      forward();
+      break;
+    case 'B': // Rückwärts
+      backward();
+      break;
+    case 'L': // Links
+      left();
+      break;
+    case 'R': // Rechts
+      right();
+      break;
+    case 'S': // Stop
+      stop();
+      break;
+  }
+}
+
+void forward() {
+  // Steuere die Motoren, um vorwärts zu fahren
+  Serial.println("Vorwärts");
+}
+
+void backward() {
+  // Steuere die Motoren, um rückwärts zu fahren
+  Serial.println("Rückwärts");
+}
+
+void left() {
+  // Steuere die Motoren, um nach links zu fahren
+  Serial.println("Links");
+}
+
+void right() {
+  // Steuere die Motoren, um nach rechts zu fahren
+  Serial.println("Rechts");
+}
+
+void stop() {
+  // Stoppe das Auto
+  Serial.println("Stop");
+}
+
+bool checkObstacle() {
+  int distance = sonar.ping_cm();
+  if (distance > 0 && distance <= 15) {
+    return true;
+  }
+  return false;
+}
