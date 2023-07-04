@@ -96,6 +96,8 @@ void forward() {
   digitalWrite(motor2Pin, HIGH);
   digitalWrite(motor3Pin, HIGH);
   digitalWrite(motor4Pin, HIGH);
+  Serial.println("F");
+
 }
 
 void backward() {
@@ -103,6 +105,7 @@ void backward() {
   digitalWrite(motor2Pin, HIGH);
   digitalWrite(motor3Pin, LOW);
   digitalWrite(motor4Pin, HIGH);
+    Serial.println("B");
 }
 
 void right() {
@@ -110,6 +113,7 @@ void right() {
   digitalWrite(motor2Pin, LOW);
   digitalWrite(motor3Pin, LOW);
   digitalWrite(motor4Pin, HIGH);
+    Serial.println("R");
 }
 
 void left() {
@@ -117,6 +121,7 @@ void left() {
   digitalWrite(motor2Pin, HIGH);
   digitalWrite(motor3Pin, HIGH);
   digitalWrite(motor4Pin, LOW);
+    Serial.println("L");
 }
 
 void stop() {
@@ -124,4 +129,5 @@ void stop() {
   digitalWrite(motor2Pin, LOW);
   digitalWrite(motor3Pin, LOW);
   digitalWrite(motor4Pin, LOW);
+    Serial.println("S");
 }
